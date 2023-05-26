@@ -1,0 +1,151 @@
+{% load static %}
+{% load fontawesome_5 %}
+<!DOCTYPE html>
+<html lang="">
+
+
+<!-- Mirrored from retnews.netlify.app/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 08:35:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Retnews &#8211; Best news, blog & magazine template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="site.webmanifest">
+    <!-- favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="{% static 'base/icon.png' %}">
+
+    <meta name="theme-color" content="#030303">
+    <!-- google fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&amp;family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&amp;display=swap"
+        rel="stylesheet">
+    <link href="{% static 'base/css/styles3875.css' %}" rel="stylesheet">
+    {% fontawesome_5_static %} 
+</head>
+
+<body>
+    <!-- loading -->
+    
+    <!-- End loading -->
+    {% include 'base/header.html' %}
+    <!-- Header  -->
+
+    <!-- End Header  -->
+
+
+
+    <!-- Form contact -->
+    <section class="wrap__contact-form mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5>contact us</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group form-group-name">
+                                <label>Your name <span class="required"></span></label>
+                                <input type="text" class="form-control" name="name" required="">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-name">
+                                <label>Your email <span class="required"></span></label>
+                                <input type="email" class="form-control" name="email" required="">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group form-group-name">
+                                <label>website <span class="required"></span></label>
+                                <input type="text" class="form-control" name="website" required="">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-name">
+                                <label>Subject <span class="required"></span></label>
+                                <input type="text" class="form-control" name="subject" required="">
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Your message </label>
+                                <textarea class="form-control" rows="8" name="message"></textarea>
+                            </div>
+                            <div class="form-group float-right mb-4">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <h5>Info location</h5>
+                    <div class="wrap__contact-form-office">
+                        <ul class="list-unstyled">
+                            <li>
+                                <span>
+                                    <i class="fa fa-home"></i>
+                                </span>
+                               {{contact.po_box}} {{contact.address_one}}
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fa fa-phone"></i>
+                                    <a href="tel:">{{contact.phone}}</a>
+                                </span>
+
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fa fa-envelope"></i>
+                                    <a href="mailto:">{{contact.email}}</a>
+                                </span>
+
+                            </li>
+                            <li>
+                                <span>
+                                    <i class="fa fa-globe"></i>
+                                    <a href="#" target="_blank"> {{contact.website}}</a>
+                                </span>
+                            </li>
+                        </ul>
+          
+
+                        <div class="social__media">
+                            <h5>find us</h5>
+                            <ul class="list-inline">
+
+                                {% for social in social_media%}
+                                <li class="list-inline-item">
+                                    <a href="{{social.link}}" style="width: 90px;" class="btn ">
+                                        {{social.icon.as_html}}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Form contact  -->
+
+{% include 'base/footer.html' %}
+
+
+    <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <script src="{% static 'base/js/index.bundle3875.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from retnews.netlify.app/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 08:35:42 GMT -->
+</html>

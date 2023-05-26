@@ -1,0 +1,641 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="">
+  <!-- Mirrored from retnews.netlify.app/homepage-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 08:33:44 GMT -->
+  <!-- Added by HTTrack --><meta
+    http-equiv="content-type"
+    content="text/html;charset=UTF-8"
+  /><!-- /Added by HTTrack -->
+  <head>
+    <meta charset="utf-8" />
+    <title>Retnews &#8211; Best news, blog & magazine template</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="manifest" href="{% static 'base/site.webmanifest' %}" />
+    <!-- favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="{% static 'base/icon.png' %}" />
+
+    <meta name="theme-color" content="#030303" />
+    <!-- google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&amp;family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="{% static 'base/css/styles3875.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- loading -->
+    <div class="loading-container">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+        <ul class="list-unstyled">
+          <li>
+            <img
+              src="{% static '/base/images/loading.png' %}"
+              alt="Alternate Text"
+              height="100"
+            />
+          </li>
+          <li>
+            <div class="spinner">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
+          </li>
+          <li>
+            <p>Loading</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- End loading -->
+   {% include 'base/header.html' %}
+    <!-- End Header news -->
+
+    <!-- Tranding news  carousel-->
+    <section class="bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div
+              class="wrapp__list__article-responsive wrapp__list__article-responsive-carousel"
+            >
+            {% for news in all_news %}
+              <div class="item">
+                <!-- Post Article -->
+                <div class="card__post card__post-list">
+                  <div class="image-sm">
+                    <a href="{% url 'detail_news' news.id %}">
+                      <img
+                        src="/media/{{ news.image }}"
+                        class="img-fluid"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+
+                  <div class="card__post__body">
+                    <div class="card__post__content">
+                      <div class="card__post__author-info mb-2">
+                        <ul class="list-inline">
+                          <li class="list-inline-item">
+                            <span class="text-primary"> {{news.writer}} </span>
+                          </li>
+                          <li class="list-inline-item">
+                            <span class="text-dark text-capitalize"> 
+                              {{news.created | date:"Y-m-d"}}
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="card__post__title">
+                        <h6>
+                          <a href="{% url 'detail_news' news.id %}"> {{news.title}} </a>
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Tranding news carousel -->
+
+    <!-- Popular news -->
+    <section>
+      <!-- Popular news  header-->
+      <div class="popular__news-header">
+        <div class="container">
+          <div class="row no-gutters">
+            <div class="col-md-8">
+              <div class="card__post-carousel">
+
+                {% for plt in politics_dash%}
+                <div class="item">
+                  <!-- Post Article -->
+                  <div class="card__post">
+                    <div class="card__post__body">
+                      <a href="{%url 'detail_news' plt.id %}">
+                        <img
+                          src="/media/{{plt.image}}"
+                          class="img-fluid"
+                          alt=""
+                        />
+                      </a>
+                      <div class="card__post__content bg__post-cover">
+                        <div class="card__post__title">
+                          <h2>
+                            <a href="{% url 'detail_news' plt.id %}">
+                              {{plt.title}}
+                            </a>
+                          </h2>
+                        </div>
+                        <div class="card__post__author-info">
+                          <ul class="list-inline">
+                            <li class="list-inline-item">
+                              <span> {{plt.date | date:'F d, Y'}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+              <div class="popular__news-right">
+                {% for politic in politics%}
+                <!-- Post Article -->
+                <div class="card__post">
+                  <div class="card__post__body card__post__transition">
+                    <a href="{% url 'detail_news' politic.id %}">
+                      <img
+                        src="/media/{{politic.image}}"
+                        class="img-fluid"
+                        alt=""
+                      />
+                    </a>
+                    <div class="card__post__content bg__post-cover">
+                      <div class="card__post__category">politics</div>
+                      <div class="card__post__title">
+                        <h5>
+                          <a href="{% url 'detail_news' politic.id %}">
+                           {{politic.title}}</a
+                          >
+                        </h5>
+                      </div>
+                      <div class="card__post__author-info">
+                        <ul class="list-inline">
+                          <li class="list-inline-item">
+                            <span> {{politic.created | date:'F d, Y'}} </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Popular news header-->
+    </section>
+    <!-- End Popular news -->
+
+    <!-- Popular news category -->
+    <section class="pt-0">
+      <div class="popular__section-news">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <div class="wrapper__list__article">
+                <h4 class="border_section">recent post</h4>
+              </div>
+              <div class="row">
+                 {% for news in all_news %}
+                <div class="col-sm-12 col-md-6">
+                  <div class="wrapp__list__article-responsive">
+                    <div class="mb-3">
+                      
+                      <!-- Post Article -->
+                      <div class="card__post card__post-list">
+                        <div class="image-sm">
+                          <a href="{% url 'detail_news' news.id %}">
+                            <img
+                              src="/media/{{news.image}}"
+                              class="img-fluid"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+
+                        <div class="card__post__body">
+                          <div class="card__post__content">
+                            <div class="card__post__author-info mb-2">
+                              <ul class="list-inline">
+                                <li class="list-inline-item">
+                                  <span class="text-primary">
+                                    {{news.writer}}
+                                  </span>
+                                </li>
+                                <li class="list-inline-item">
+                                  <span class="text-dark text-capitalize">
+                                    {{ news.created | date:"Y-m-d" }}
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="card__post__title">
+                              <h6>
+                                <a href="{% url 'detail_news' news.id %}">
+                                  {{news.title}}
+                                </a>
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post news carousel -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <aside class="wrapper__list__article">
+              <h4 class="border_section">sports</h4>
+            </aside>
+          </div>
+          <div class="col-md-12">
+            <div class="article__entry-carousel">
+
+
+              {% for sport in sports %}
+              <div class="item">
+                <!-- Post Article -->
+                <div class="article__entry">
+                  <div class="article__image">
+                    <a href="{% url 'detail_news' sport.id %}">
+                      <img
+                        src="/media/{{sport.image}}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </a>
+                  </div>
+                  <div class="article__content">
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <span> {{sport.created |  date:'F d, Y'}} </span>
+                      </li>
+                    </ul>
+                    <h5>
+                      <a href="{% url 'detail_news' sport.id %}">
+                        {{sport.title}}
+                      </a>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              
+          
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Popular news category -->
+
+      <!-- Popular news category -->
+      <div class="mt-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <aside class="wrapper__list__article mb-0">
+                <h4 class="border_section">Music</h4>
+                <div class="row">
+
+                  {% for music in musics %}
+                  <div class="col-md-6">
+                    <div class="mb-4">
+                      <!-- Post Article -->
+                      <div class="article__entry">
+                        <div class="article__image">
+                          <a href="{% url 'detail_news' music.id %}">
+                            <img
+                              src="/media/{{music.image}}"
+                              alt=""
+                              class="img-fluid"
+                            />
+                          </a>
+                        </div>
+                        <div class="article__content">
+                          <ul class="list-inline">
+                            <li class="list-inline-item">
+                              <span> {{music.created | date:'F d, Y' }} </span>
+                            </li>
+                          </ul>
+                          <h5>
+                            <a href="{% url 'detail_news' music.id %}">
+                              {{music.title}}
+                            </a>
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 {% endfor %}
+                  
+             
+                </div>
+              </aside>
+              <aside class="wrapper__list__article">
+                <h4 class="border_section">technology</h4>
+
+                <div class="wrapp__list__article-responsive">
+                  
+                  {% for tech in technologies%}
+                  <!-- Post Article List -->
+                  <div
+                    class="card__post card__post-list card__post__transition mt-30"
+                  >
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="card__post__transition">
+                          <a href="{% url 'detail_news' tech.id %}">
+                            <img
+                              src="/media/{{tech.image}}"
+                              class="img-fluid w-100"
+                              alt=""
+                            />
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-7 my-auto pl-0">
+                        <div class="card__post__body">
+                          <div class="card__post__content">
+                            <div class="card__post__author-info mb-2">
+                              <ul class="list-inline">
+                                <li class="list-inline-item">
+                                  <span class="text-dark text-capitalize">
+                                   {{tech.created | date:'F d, Y'}}
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="card__post__title">
+                              <h5>
+                                <a href="{% url 'detail_news' tech.id %}">
+                                  {{tech.title}}
+                                </a>
+                              </h5>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 {% endfor %}
+                </div>
+              </aside>
+            </div>
+
+            <div class="col-md-4">
+              <div class="sidebar-sticky">
+                <aside class="wrapper__list__article">
+                  <h4 class="border_section">Latest post</h4>
+                  <div class="wrapper__list__article-small">
+                    
+                    {% for latest_post in latest_posts%}
+                    <!-- Post Article -->
+                    <div class="article__entry">
+                      <div class="article__image">
+                        <a href="{% url 'detail_news' latest_post.id %}">
+                          <img
+                            src="/media/{{latest_post.image}}"
+                            alt=""
+                            class="img-fluid"
+                          />
+                        </a>
+                      </div>
+                      <div class="article__content">
+                        <ul class="list-inline">
+                          <li class="list-inline-item">
+                            <span class="text-dark text-capitalize">
+                              {{latest_post.created | date:'F d, Y'}}
+                            </span>
+                          </li>
+                        </ul>
+                        <h5>
+                          <a href="{% url 'detail_news' latest_post.id %}">
+                            {{latest_post.title}}
+                          </a>
+                        </h5>
+                        <p>
+                          {{latest_post.description}}
+                        </p>
+                        <a
+                          href="{% url 'detail_news' latest_post.id %}"
+                          class="btn btn-outline-primary mb-4 text-capitalize"
+                        >
+                          read more</a
+                        >
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </aside>
+
+                <!-- social media -->
+
+                <aside class="wrapper__list__article">
+                  <h4 class="border_section">stay conected</h4>
+                  <!-- widget Social media -->
+                  <div class="wrap__social__media">
+                    <a href="#" target="_blank">
+                      <div class="social__media__widget facebook">
+                        <span class="social__media__widget-icon">
+                          <i class="fa fa-facebook"></i>
+                        </span>
+                        <span class="social__media__widget-counter">
+                          19,243 fans
+                        </span>
+                        <span class="social__media__widget-name"> like </span>
+                      </div>
+                    </a>
+                    <a href="#" target="_blank">
+                      <div class="social__media__widget twitter">
+                        <span class="social__media__widget-icon">
+                          <i class="fa fa-twitter"></i>
+                        </span>
+                        <span class="social__media__widget-counter">
+                          2.076 followers
+                        </span>
+                        <span class="social__media__widget-name"> follow </span>
+                      </div>
+                    </a>
+                    <a href="#" target="_blank">
+                      <div class="social__media__widget youtube">
+                        <span class="social__media__widget-icon">
+                          <i class="fa fa-youtube"></i>
+                        </span>
+                        <span class="social__media__widget-counter">
+                          15,200 followers
+                        </span>
+                        <span class="social__media__widget-name">
+                          subscribe
+                        </span>
+                      </div>
+                    </a>
+                  </div>
+                </aside>
+                <!-- end social media -->
+
+                <!-- tags -->
+                <aside class="wrapper__list__article">
+                  <h4 class="border_section">tags</h4>
+                  <div class="blog-tags p-0">
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <a href="#"> #property </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #sea </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #programming </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #sea </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #property </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #life style </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #technology </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #framework </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #sport </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #game </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #wfh </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #sport </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #game </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #wfh </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#"> #framework </a>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+                <!-- end tags -->
+
+                <!-- advertise -->
+                <aside class="wrapper__list__article">
+                  <h4 class="border_section">Advertise</h4>
+                  <a href="#">
+                    <figure>
+                      <img
+                        src="{% static '/base/images/banner2.jpg' %}"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </figure>
+                  </a>
+                </aside>
+                <!-- end advertise -->
+
+                <!-- newsletter -->
+                <aside class="wrapper__list__article">
+                  <h4 class="border_section">newsletter</h4>
+                  <!-- Form Subscribe -->
+                  <div class="widget__form-subscribe bg__card-shadow">
+                    <h6>
+                      The most important world news and events of the day.
+                    </h6>
+                    <p>
+                      <small
+                        >Get magzrenvi daily newsletter on your inbox.</small
+                      >
+                    </p>
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Your email address"
+                      />
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          sign up
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </aside>
+                <!-- end newsletter -->
+              </div>
+            </div>
+            <div class="mx-auto">
+              <!-- Pagination -->
+              <div class="pagination-area">
+                <div
+                  class="pagination wow fadeIn animated"
+                  data-wow-duration="2s"
+                  data-wow-delay="0.5s"
+                  style="
+                    visibility: visible;
+                    animation-duration: 2s;
+                    animation-delay: 0.5s;
+                    animation-name: fadeIn;
+                  "
+                >
+                  <a href="#"> « </a>
+                  <a href="#"> 1 </a>
+                  <a class="active" href="#"> 2 </a>
+                  <a href="#"> 3 </a>
+                  <a href="#"> 4 </a>
+                  <a href="#"> 5 </a>
+
+                  <a href="#"> » </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Popular news category -->
+
+<!--Footer -->
+{% include 'base/footer.html' %}
+
+    <a href="javascript:" id="return-to-top"
+      ><i class="fa fa-chevron-up"></i
+    ></a>
+
+    <script src="{% static '/base/js/index.bundle3875.js'%}"></script>
+  </body>
+
+  <!-- Mirrored from retnews.netlify.app/homepage-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 May 2023 08:34:32 GMT -->
+</html>
