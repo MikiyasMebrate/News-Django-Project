@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import News, Team, About, Contact, SocialMedia
 from django.core.mail import send_mail
 # Create your views here.
-import requests
 def homepage(request):
     sport = News.objects.filter(category = 2)
     technology = News.objects.filter(category = 4)
