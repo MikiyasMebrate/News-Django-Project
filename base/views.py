@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import News, Team, About, Contact, SocialMedia
 from django.core.mail import send_mail
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+
 # Create your views here.
 def homepage(request):
     sport = News.objects.filter(category = 2)
@@ -102,19 +105,15 @@ def detail_news(request, pk):
 
     return render(request, 'base/detail_news.html', context)
 
-def send_message(request):
-    apiSecret = "0c9c4f4171b7fa6fb15269700b5530f1aee9b699"
-    
-    message = {
-        "secret": apiSecret,
-        "mode": "devices",
-        "device": "00000000-0000-0000-7982-fe25812e7a89",
-        "sim": 1,
-        "priority": 1,
-        "phone": "+251912058083",
-        "message": "Hello World!"
+
+
+
+
+def homepage_json(request):
+    latest_post = list( News.objects.all().values()[:3])
+    context = {
+        'latest_post' : latest_post
     }
-    
-    r = requests.post(url = "https://hahu.io/api/send/sms", params = message) 
-    result = r.json()
-    return 'sent'
+    return JsonResponse(context)
+
+
